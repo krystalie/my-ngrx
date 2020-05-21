@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
@@ -13,9 +14,10 @@ import { MyCounterComponent } from './my-counter/my-counter.component';
   declarations: [AppComponent, MyCounterComponent],
   imports: [
     BrowserModule,
+	FormsModule,
 	/**StoreModule.forRoot enables global providers 
 	throughout the app to access store**/
-    StoreModule.forRoot({ count: counterReducer })
+    StoreModule.forRoot({ counter: counterReducer })
   ],
   providers: [],
   bootstrap: [AppComponent],

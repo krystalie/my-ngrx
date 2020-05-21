@@ -1,0 +1,18 @@
+<div *ngIf="counter$ | async as c">
+
+
+	<h2>{{c.message}}</h2>
+	<h4>{{c.counter}}</h4>
+
+	<button (click)="increment()">Increment</button>
+	<button (click)="decrement()">Decrement</button>
+	<button (click)="reset()">Reset</button>
+	
+	<input [(ngModel)] = "text">
+	<button (click)="editText()">Change text</button>
+	
+
+
+
+
+</div>
