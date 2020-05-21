@@ -1,24 +1,35 @@
-import { createReducer, on } from "@ngrx/store";
-//import createReducer function to skip case switching
-import { increment, decrement, reset } from "./counter.action";
-//import actions created through createAction
-
-export const initialState = 0;
+import * as CounterActions from './counter.action'
+import { Counter }from './counter'
 
 
-// createReducer must be used with createAction function for actions
-// must have an initial state
-const _counterReducer = createReducer(
-  initialState,
-  //on(actionCreater created name, state change function)
-  on(increment, state => state + 1),
-  on(decrement, state => state - 1),
-  on(reset, state => 0)
-);
+export type CounterTypes = CounterActions.All
+
+export const initialState: Counter = {
+	counter : 0,
+	message : 'Hello World',
+}
 
 
-/**the returned ActionReducer(_counterReducer) must be from 
-an exported reducer function**/
-export function counterReducer(state, action) {
-  return _counterReducer(state, action);
+const newState = (state, newData) => {
+	return Object.assign({},state,newData)
+}
+
+export function counterReducer(state: Counter = initialState, action: CounterTypes) {
+	
+  switch(action.type){
+	  case CounterActions.EDITTEXT:
+	  return newState(state, {message: action.payload});
+	  
+	  case CounterActions.INCREMENT:
+	  return newState(state, {counter : (state.counter + 1)});
+	  
+	  case CounterActions.DECREMENT:
+	  return newState(state, {counter : (state.counter - 1)});
+	  
+	  case CounterActions.RESET:
+	  return initialState
+	  
+	  default:
+	  return initialState
+  }
 }
